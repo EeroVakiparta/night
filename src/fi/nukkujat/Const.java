@@ -5,8 +5,8 @@ public class Const {
     public static class Vuoro {
         public final static Character YO = 'y';
         public final static Character VAPAA = 'v';
-        public final static Character NUKKUMA = 'n';
-        public final static Character MUUVUORO = 'm';
+        public final static Character NUKKUMA = 'n'; // paperimiehellä päivä ei ole vapaapäivä jos sen joutuu nukkumaan
+        public final static Character MUUVUORO = 'm'; // muu kuin yävuoro
     }
 
     public static class Saanto {
@@ -25,8 +25,7 @@ public class Const {
         public final static int VAPAA_VIRHE = 1;
         public final static int YOVUORO_VIRHE = 1;
     }
-
-
+    
     public static class AloitusPaiva {
         public final static int MAANANTAI = 0;
         public final static int TIISTAI = 1;

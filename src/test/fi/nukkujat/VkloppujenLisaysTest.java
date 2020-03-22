@@ -27,7 +27,7 @@ public class VkloppujenLisaysTest {
         String vuoro = "yyynv";
         List<Character> testiLista = stringToCharList(vuoro);
         List<Character> tuikittuLista = HelpMeh.viikonlopunTuikkia(testiLista, AloitusPaiva.MAANANTAI);
-        assertEquals(0, Alyttomat.kuinkaHuano(tuikittuLista, 0));
+        assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class VkloppujenLisaysTest {
         String vuoro = "mmmmmmyyyn";
         List<Character> testiLista = stringToCharList(vuoro);
         List<Character> tuikittuLista = HelpMeh.viikonlopunTuikkia(testiLista, AloitusPaiva.MAANANTAI);
-        assertEquals(1, Alyttomat.kuinkaHuano(tuikittuLista, 0));
+        assertEquals(1, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class VkloppujenLisaysTest {
         String vuoro = "mmmmmmyyynvvv";
         List<Character> testiLista = stringToCharList(vuoro);
         List<Character> tuikittuLista = HelpMeh.viikonlopunTuikkia(testiLista, AloitusPaiva.PERJANTAI);
-        assertEquals(0, Alyttomat.kuinkaHuano(tuikittuLista, 0));
+        assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class VkloppujenLisaysTest {
         String vuoro = "yyynvmmmmmynvm";
         List<Character> testiLista = stringToCharList(vuoro);
         List<Character> tuikittuLista = HelpMeh.viikonlopunTuikkia(testiLista, AloitusPaiva.SUNNUNTAI);
-        assertEquals(1, Alyttomat.kuinkaHuano(tuikittuLista, 0));
+        assertEquals(1, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
 } 
