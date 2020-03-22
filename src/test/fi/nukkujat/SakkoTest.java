@@ -4,20 +4,12 @@ import fi.nukkujat.Alyttomat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.RunWith;
 
-import static fi.nukkujat.Const.Saanto.VIIKONLOPUT_VAPAAT_EIKA_LISTASSA;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static fi.nukkujat.Const.*;
-import static fi.nukkujat.Const.*;
-import static fi.nukkujat.Const.AloitusPaiva.*;
-import static fi.nukkujat.Const.Saanto.NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN;
-import static fi.nukkujat.Const.Vuoro.*;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import static fi.nukkujat.Const.Saanto;
+import static fi.nukkujat.HelpMeh.stringToCharList;
+import static org.junit.Assert.assertEquals;
 
 public class SakkoTest {
 
@@ -31,77 +23,87 @@ public class SakkoTest {
 
     @Test
     public void t1_ioob() throws Exception {
-        String vuoro = "yyyyy";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(35, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("yyyyy");
+        assertEquals(35, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t2_yoloppuu() throws Exception {
-        String vuoro = "yym";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(12, Alyttomat.kuinkaHuano(testiLista,AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("yym");
+        assertEquals(12, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t3_kaksiYorimpsua() throws Exception {
-        String vuoro = "yymyy";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(24, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("yymyy");
+        assertEquals(24, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t4_nukkumaVapaanJalkeen() throws Exception {
-        String vuoro = "myyyvvvnm";
-        List<Character> testiLista = litaChar(vuoro);
+        List<Character> testiLista = stringToCharList("myyyvvvnm");
         if (Saanto.NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN) {
-            assertEquals(1, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+            assertEquals(1, Alyttomat.kuinkaHuano(testiLista, 0));
         } else {
-            assertEquals(0, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+            assertEquals(0, Alyttomat.kuinkaHuano(testiLista, 0));
         }
     }
 
     @Test
     public void t5_taydellinenMiniTyovuoro() throws Exception {
-        String vuoro = "mmmmmyyyynvvvvm";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(0, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("mmmmmyyyynvvvvm");
+        assertEquals(0, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t6_vapaaPaivat1() throws Exception {
-        String vuoro = "yyyyvvv";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(1, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("yyyyvvv");
+        assertEquals(1, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t7_vapaaPaivat2() throws Exception {
-        String vuoro = "yyyyvv";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(4, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("yyyyvv");
+        assertEquals(4, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t8_vapaaPaivat3() throws Exception {
-        String vuoro = "yyyyv";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(17, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("yyyyv");
+        assertEquals(17, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
     @Test
     public void t9_taydellinenPidempiTyovuoro() throws Exception {
-        String vuoro = "mmmmmmyyynvvvmmmmmmyyyyynvvvvvmmmmmm";
-        List<Character> testiLista = litaChar(vuoro);
-        assertEquals(0, Alyttomat.kuinkaHuano(testiLista, AloitusPaiva.MAANANTAI));
+        List<Character> testiLista = stringToCharList("mmmmmmyyynvvvmmmmmmyyyyynvvvvvmmmmmm");
+        assertEquals(0, Alyttomat.kuinkaHuano(testiLista, 0));
     }
 
-        private List<Character> litaChar(String lista) {
-        List<Character> charLista = new ArrayList<>();
-        for (char c : lista.toCharArray()) {
-            charLista.add(c);
+    @Test
+    public void t10_JS_koodarin_tyovuorlista() throws Exception {
+        List<Character> testiLista = stringToCharList("mvvvyyymmymvyvmmmyyvyvvmyvvvmym");
+        assertEquals(38, Alyttomat.kuinkaHuano(testiLista, 0));
+    }
+
+    @Test
+    public void t11_JS_tyoharjoittelijan_tyovuorlista() throws Exception {
+        List<Character> testiLista = stringToCharList("yymvyyvyvvmvvvyyymyyyyyyyyymyvy");
+        assertEquals(107, Alyttomat.kuinkaHuano(testiLista, 0));
+    }
+
+    @Test
+    public void t12_JS_tyoharjoittelijan_tyovuorlista_toinenKesaToissa() throws Exception {
+        List<Character> testiLista = stringToCharList("mvmyvvvyyyvvymyymvmvyyyvvvmyvmy");
+        assertEquals(19, Alyttomat.kuinkaHuano(testiLista, 0));
+    }
+
+    @Test
+    public void t12_eiOitalainkaan() throws Exception {
+        List<Character> testiLista = stringToCharList("mmnmmmvvvmmvmvmvmvmvnv");
+        if (Saanto.NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN) {
+            assertEquals(2, Alyttomat.kuinkaHuano(testiLista, 0));
+        } else {
+            assertEquals(0, Alyttomat.kuinkaHuano(testiLista, 0));
         }
-        return charLista;
     }
-
 } 

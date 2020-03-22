@@ -1,5 +1,6 @@
 package fi.nukkujat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static fi.nukkujat.Const.Saanto.VIIKONLOPUT_VAPAAT_EIKA_LISTASSA;
@@ -14,7 +15,7 @@ public class HelpMeh {
 
         if (VIIKONLOPUT_VAPAAT_EIKA_LISTASSA) {
             int counter = 0 + aloitusPaiva;
-            for (paivaNro = 0; paivaNro < tyavuorolista.size()+1; paivaNro++) {
+            for (paivaNro = 0; paivaNro < tyavuorolista.size() + 1; paivaNro++) {
                 if (counter == 5) {
                     tyavuorolista.add(paivaNro, VAPAA);
                     tyavuorolista.add(paivaNro, VAPAA);
@@ -31,5 +32,13 @@ public class HelpMeh {
         }
         System.out.println("viikonlopunTuikkiaTuikittu: " + tyavuorolista + " viikonloppupaivialisatty: " + lisatyt);
         return tyavuorolista;
+    }
+
+    public static List<Character> stringToCharList(String lista) {
+        List<Character> charLista = new ArrayList<>();
+        for (char c : lista.toCharArray()) {
+            charLista.add(c);
+        }
+        return charLista;
     }
 }

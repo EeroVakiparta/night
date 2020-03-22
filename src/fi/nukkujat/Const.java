@@ -11,14 +11,21 @@ public class Const {
 
     public static class Saanto {
         public final static int MAKS_YOT = 5;
-        public final static boolean NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN = true;
-        public final static boolean NUKKUMAPAIVA_OLTAVA = true;
-        public final static boolean VIIKONLOPUT_VAPAAT_EIKA_LISTASSA = true;
-        public final static boolean POTKUT_VUOROLISTAN_LOPUSSA = false;
-        public final static boolean YOVUOROJEN_TARKOITAA_VAIN_MONKIKKOA = false;
-        public final static int KIINTEAT_VAPAAT_MIN = 1;
-        public final static int KIINTEAT_VAPAAT_MAX = 2;
-}
+        public final static boolean NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN = true; // Ei sallita nukkumapäiviä muiden vuorojen jälkeen
+        public final static boolean NUKKUMAPAIVA_OLTAVA = true; // Penaltia jos nukkumapaiva puuttuu
+        public final static boolean VIIKONLOPUT_VAPAAT_EIKA_LISTASSA = true; // Vaikuttaa vain listanmuokkaajaan
+        public final static boolean POTKUT_VUOROLISTAN_LOPUSSA = false; // Tarvitseeko vapaista murehtia jos yöstä lentää pihalle
+        public final static boolean YOVUOROJEN_TARKOITAA_VAIN_MONKIKKOA = false; // • yövuoro(jen)
+        public final static int KIINTEAT_VAPAAT_MIN = 1; //TODO: to be implemented
+        public final static int KIINTEAT_VAPAAT_MAX = 2; //TODO: to be implemented
+    }
+    //Jos nyt ymmärsin virheen vakavuuden väärin ja sitä täytyy nopeasti vakavoittaa
+    public static class Kerroin {
+        public final static int NUKKUMA_VIRHE = 1;
+        public final static int VAPAA_VIRHE = 1;
+        public final static int YOVUORO_VIRHE = 1;
+    }
+
 
     public static class AloitusPaiva {
         public final static int MAANANTAI = 0;
