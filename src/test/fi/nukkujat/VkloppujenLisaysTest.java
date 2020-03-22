@@ -2,8 +2,6 @@ package test.fi.nukkujat;
 
 import fi.nukkujat.Alyttomat;
 import fi.nukkujat.HelpMe;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,44 +10,33 @@ import static fi.nukkujat.Const.AloitusPaiva;
 import static fi.nukkujat.HelpMe.stringToCharList;
 import static org.junit.Assert.assertEquals;
 
+//TODO: lisää inputti vaihtoehtoja
 public class VkloppujenLisaysTest {
-
-    @Before
-    public void before() throws Exception {
-    }
-
-    @After
-    public void after() throws Exception {
-    }
 
     @Test
     public void t1_yoViikkoViikonloputLasketaanMutEiListassa() throws Exception {
-        String vuoro = "yyynv";
-        List<Character> testiLista = stringToCharList(vuoro);
+        List<Character> testiLista = stringToCharList("yyynv");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.MAANANTAI);
         assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
     public void t2_kaksViikkoaViikonloputLasketaanMutEiListassa() throws Exception {
-        String vuoro = "mmmmmmyyyn";
-        List<Character> testiLista = stringToCharList(vuoro);
+        List<Character> testiLista = stringToCharList("mmmmmmyyyn");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.MAANANTAI);
         assertEquals(1, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
     public void t3_kaksViikkoaViikonloputLasketaanMutEiListassaAlkaaPerjantaista() throws Exception {
-        String vuoro = "mmmmmmyyynvvv";
-        List<Character> testiLista = stringToCharList(vuoro);
+        List<Character> testiLista = stringToCharList("mmmmmmyyynvvv");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.PERJANTAI);
         assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
     public void t4_kaksViikkoaViikonloputLasketaanMutEiListassaAlkaaSunnuntaista() throws Exception {
-        String vuoro = "yyynvmmmmmynvm";
-        List<Character> testiLista = stringToCharList(vuoro);
+        List<Character> testiLista = stringToCharList("yyynvmmmmmynvm");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.SUNNUNTAI);
         assertEquals(1, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
