@@ -4,23 +4,35 @@ package fi.nukkujat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static fi.nukkujat.Const.Saanto;
+import static fi.nukkujat.Const.Saanto.*;
+import static fi.nukkujat.Const.Vuoro.*;
+
+
 public class Alyttomat {
 
-    public static int kuinkaHuano(List<Character> tyavuorolista) {
+    public static int kuinkaHuano(List<Character> tyavuorolista, int aloitusPaivaNro) {
         System.out.println("----");
         System.out.println("KUINKAHUONO");
         System.out.println("sai tyovuorolistan =" + tyavuorolista);
         int sakko = 0;
+        int latestSakko = 0;
         int yorimpsujenLkm = 0;
+        int paivaNro = 0;
 
-        for (int paivaNro = 0; paivaNro < tyavuorolista.size(); paivaNro++) {
+        for (paivaNro = 0 ; paivaNro < tyavuorolista.size(); paivaNro++) {
 
             Character vuoro = tyavuorolista.get(paivaNro);
-            if (vuoro.equals(Vuoro.YO)) {
+            if (vuoro.equals(YO)) {
                 YokasittelynTulos tulos = yokasittelija(tyavuorolista, paivaNro);
-                sakko = sakko + tulos.rimpsunSakot;
+                latestSakko = tulos.rimpsunSakot;
+                sakko = sakko + latestSakko;
                 paivaNro = paivaNro + tulos.rimpsu.size();
                 yorimpsujenLkm++;
+            }
+
+            if (Saanto.POTKUT_VUOROLISTAN_LOPUSSA) {
+                sakko = sakko - latestSakko;
             }
 
         }
@@ -31,7 +43,6 @@ public class Alyttomat {
     }
 
     private static YokasittelynTulos yokasittelija(List<Character> tyavuorolista, int paivaNro) {
-        boolean valmis = false;
         boolean yoVuorotLoppu = false;
         int rimsunSakot = 0;
         System.out.println("");
@@ -40,19 +51,19 @@ public class Alyttomat {
 
         List<Character> rimpsu = new ArrayList<>();
 
-        while (!valmis && paivaNro < tyavuorolista.size() ) {
+        while (paivaNro < tyavuorolista.size()) {
             Character nykyVuoro = tyavuorolista.get(paivaNro);
-            if (!nykyVuoro.equals(Vuoro.MUUVUORO)) {
-                if (nykyVuoro.equals(Vuoro.YO)) {
+            if (!nykyVuoro.equals(MUUVUORO)) {
+                if (nykyVuoro.equals(YO)) {
                     if (yoVuorotLoppu) {
                         break;
                     }
                 }
-                if (!nykyVuoro.equals(Vuoro.YO)) {
+                if (!nykyVuoro.equals(YO)) {
                     yoVuorotLoppu = true;
                 }
                 rimpsu.add(nykyVuoro);
-            }else {
+            } else {
                 break;
             }
             paivaNro++;
@@ -62,33 +73,30 @@ public class Alyttomat {
         int vapaaPaivat = 0;
         for (int i = 0; i < rimpsu.size(); i++) {
 
-            //TODO: tee oma yokasittelija
             Character paiva = rimpsu.get(i);
-            if (paiva.equals(Vuoro.YO)) {
+            if (paiva.equals(YO)) {
                 yot++;
             }
 
-            //TODO: tee oma nukkumakasittelija
-            if (paiva.equals(Vuoro.NUKKUMA)) {
-                if (Saanto.NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN) {
-                    if (!rimpsu.get(i - 1).equals(Vuoro.YO)) {
+            if (paiva.equals(NUKKUMA)) {
+                if (NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN) {
+                    if (!rimpsu.get(i - 1).equals(YO)) {
                         rimsunSakot++;
-                        System.out.println("!!! nukumapäivä väärin +1 penalti" );
+                        System.out.println("!!! nukumapäivä väärin +1 penalti ");
                     }
                 }
                 nukkumaPaivat++;
             }
 
-            //TODO: tee oma vapaakasittelija
-            if (paiva.equals(Vuoro.VAPAA)) {
+            if (paiva.equals(VAPAA)) {
                 vapaaPaivat++;
             }
 
         }
         //Yövuoroja voi olla peräkkäin 1 – 5
         if (yot > Saanto.MAKS_YOT) {
-           rimsunSakot = rimsunSakot + yot - Saanto.MAKS_YOT;
-            System.out.println("!!! Yövuoroja voi olla peräkkäin 1 – 5 " + (yot - Saanto.MAKS_YOT) );
+            rimsunSakot = rimsunSakot + yot - Saanto.MAKS_YOT;
+            System.out.println("!!! Yövuoroja voi olla peräkkäin 1 – 5 " + (yot - Saanto.MAKS_YOT));
         }
 
 
@@ -100,41 +108,42 @@ public class Alyttomat {
             rimsunSakot = rimsunSakot + (yot - vapaaPaivat);
             System.out.println("!!! n:n yövuoron jälkeen oltava vähintään n vapaapäivää =" + (yot - vapaaPaivat));
         }
-        if (yot > vapaaPaivat+1) {
+        if (yot > vapaaPaivat + 1) {
             rimsunSakot = rimsunSakot + (yot - vapaaPaivat);
             System.out.println("!!! yövuoron jälkeen oltava vähintään n-1 vapaapäivää =" + (yot - vapaaPaivat));
         }
-        if (yot > vapaaPaivat+2) {
+        if (yot > vapaaPaivat + 2) {
             rimsunSakot = rimsunSakot + (yot - vapaaPaivat);
             System.out.println("!!! n:n yövuoron jälkeen oltava vähintään n-2 vapaapäivää =" + (yot - vapaaPaivat));
         }
 
-        //•	yövuorojen jälkeen oltava vähintään 2 vapaapäivää
-        //•	yövuorojen jälkeen oltava vähintään 1 vapaapäivä
-        // Sitä enempi penaltia mitä pidempi yärupeama
-        if (vapaaPaivat < 1) {
-            rimsunSakot = rimsunSakot + yot;
-            System.out.println("!!! yövuorojen jälkeen oltava vähintään 1 vapaapäivää =" + (yot));
-        }
-        if (vapaaPaivat < 2) {
-            rimsunSakot = rimsunSakot + yot;
-            System.out.println("!!! yövuorojen jälkeen oltava vähintään 2 vapaapäivää =" + (yot));
-        }
-
-        //•	yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää
-        //•	yövuorojen jälkeen oltava nukkumapäivä + vähintään 1 vapaapäivä
-        if (Saanto.NUKKUMAPAIVA_OLTAVA) {
-            if (nukkumaPaivat != 1 && vapaaPaivat < 2) {
+        if (!YOVUOROJEN_TARKOITAA_VAIN_MONKIKKOA) {
+            //•	yövuorojen jälkeen oltava vähintään 2 vapaapäivää
+            //•	yövuorojen jälkeen oltava vähintään 1 vapaapäivä
+            // Sitä enempi penaltia mitä pidempi yärupeama
+            if (vapaaPaivat < 1) {
                 rimsunSakot = rimsunSakot + yot;
-                System.out.println("!!! yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää =" + (yot));
+                System.out.println("!!! yövuorojen jälkeen oltava vähintään 1 vapaapäivää =" + (yot));
+            }
+            if (vapaaPaivat < 2) {
+                rimsunSakot = rimsunSakot + yot;
+                System.out.println("!!! yövuorojen jälkeen oltava vähintään 2 vapaapäivää =" + (yot));
             }
 
-            if (nukkumaPaivat != 1 && vapaaPaivat < 1) {
-                rimsunSakot = rimsunSakot + yot;
-                System.out.println("!!! yövuorojen jälkeen oltava nukkumapäivä + vähintään 1 vapaapäivä =" + (yot));
+            //•	yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää
+            //•	yövuorojen jälkeen oltava nukkumapäivä + vähintään 1 vapaapäivä
+            if (Saanto.NUKKUMAPAIVA_OLTAVA) {
+                if (nukkumaPaivat != 1 && vapaaPaivat < 2) {
+                    rimsunSakot = rimsunSakot + yot;
+                    System.out.println("!!! yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää =" + (yot));
+                }
+
+                if (nukkumaPaivat != 1 && vapaaPaivat < 1) {
+                    rimsunSakot = rimsunSakot + yot;
+                    System.out.println("!!! yövuorojen jälkeen oltava nukkumapäivä + vähintään 1 vapaapäivä =" + (yot));
+                }
             }
         }
-
 
 
         YokasittelynTulos yokasittelynTulos = new YokasittelynTulos(rimpsu, rimsunSakot);
@@ -170,19 +179,5 @@ public class Alyttomat {
         }
     }
 
-    public static class Vuoro {
-        public final static Character YO = 'y';
-        public final static Character VAPAA = 'v';
-        public final static Character NUKKUMA = 'n';
-        public final static Character MUUVUORO = 'm';
-    }
-
-    public static class Saanto {
-        public final static int MAKS_YOT = 5;
-        public final static boolean NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN = true;
-        public final static boolean NUKKUMAPAIVA_OLTAVA = true;
-        public final static int KIINTEAT_VAPAAT_MIN = 1;
-        public final static int KIINTEAT_VAPAAT_MAX = 2;
-    }
 
 }
