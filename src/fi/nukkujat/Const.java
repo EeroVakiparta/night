@@ -19,13 +19,14 @@ public class Const {
         public final static int KIINTEAT_VAPAAT_MIN = 1; //TODO: to be implemented
         public final static int KIINTEAT_VAPAAT_MAX = 2; //TODO: to be implemented
     }
+
     //Jos nyt ymmärsin virheen vakavuuden väärin ja sitä täytyy nopeasti vakavoittaa
     public static class Kerroin {
         public final static int NUKKUMA_VIRHE = 1;
         public final static int VAPAA_VIRHE = 1;
         public final static int YOVUORO_VIRHE = 1;
     }
-    
+
     public static class AloitusPaiva {
         public final static int MAANANTAI = 0;
         public final static int TIISTAI = 1;

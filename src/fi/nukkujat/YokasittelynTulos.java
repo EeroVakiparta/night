@@ -11,19 +11,11 @@ final class YokasittelynTulos {
         this.yoPutkenSakot = yoPutkenSakot;
     }
 
-    public List<Character> getYoPutki() {
-        return yoPutki;
-    }
-
-    public int getYoPutkenSakot() {
-        return yoPutkenSakot;
-    }
-
     @Override
     public String toString() {
         return "YokasittelynTulos= " +
                 "putki: " + yoPutki +
-                " putkenSakot: " + yoPutkenSakot ;
+                " putkenSakot: " + yoPutkenSakot;
 
     }
 }

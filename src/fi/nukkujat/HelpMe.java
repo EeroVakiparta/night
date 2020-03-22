@@ -2,14 +2,15 @@ package fi.nukkujat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static fi.nukkujat.Const.Saanto.VIIKONLOPUT_VAPAAT_EIKA_LISTASSA;
 import static fi.nukkujat.Const.Vuoro.VAPAA;
 
-public class HelpMeh {
-    public static List<Character> viikonlopunTuikkia(List<Character> tyavuorolista, int aloitusPaiva) {
+public class HelpMe {
+    public static List<Character> viikonlopunLisaaja(List<Character> tyavuorolista, int aloitusPaiva) {
 
-        System.out.println("viikonlopunTuikkiaTuikii " + tyavuorolista + " aloituspaiva " + aloitusPaiva);
+        System.out.println("viikonlopunLisaaja " + tyavuorolista + " aloituspaiva " + aloitusPaiva);
         int paivaNro = 0;
         int lisatyt = 0;
 
@@ -30,7 +31,7 @@ public class HelpMeh {
                 counter++;
             }
         }
-        System.out.println("viikonlopunTuikkiaTuikittu: " + tyavuorolista + " viikonloppupaivialisatty: " + lisatyt);
+        System.out.println("viikonlopunLisaajan jalkeen: " + tyavuorolista + " viikonloppupaivia lisatty: " + lisatyt);
         return tyavuorolista;
     }
 
@@ -40,5 +41,16 @@ public class HelpMeh {
             charLista.add(c);
         }
         return charLista;
+    }
+
+    public static String rVuoroLista(int l) {
+        String mahdollisetPaivat ="myvn";
+        StringBuilder s = new StringBuilder();
+        Random r = new Random();
+        for (int i = 0; i < l; i++) {
+            s.append(mahdollisetPaivat.charAt(r.nextInt(mahdollisetPaivat
+                    .length())));
+        }
+        return s.toString();
     }
 }

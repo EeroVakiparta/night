@@ -11,7 +11,24 @@ import static fi.nukkujat.Const.Vuoro.*;
 
 
 public class Alyttomat {
-    public static int kuinkaHuonoLista(List<Character> tyavuorolista, int aloitusPaivaNro) {
+
+    public static int kuinkaHuonoLista(List<Character> tyavuorolista) {
+        return kuinkaHuonoLista(tyavuorolista, 0);
+    }
+
+    /**
+     * Kuinka huono lista int.
+     *
+     * Yrittää kertoa kuinka huono annettu vuorolista on
+     * Löydetyt yövuorot tutkitaan vertaamalla niitä sääntöihin
+     * Palautetaan löydettyjen yövuoroputkien yhteen lasketut sakkopisteet
+     * paljon sakkopisteitä -> huonompi vuorolista
+     *
+     * @param tyavuorolista   the tyavuorolista
+     * @param aloitusPaivaNro the aloitus paiva nro
+     * @return the int
+     */
+    public static int kuinkaHuonoLista(List<Character> tyavuorolista, int aloitusPaivaNro) { //TODO: aloitusPaivaNro palkka+pyhat
         System.out.println("\nkuinkaHuonoLista =" + tyavuorolista);
         int sakko = 0;
         int latestSakko = 0;
@@ -53,7 +70,7 @@ public class Alyttomat {
     private static YokasittelynTulos yoPutkenTutkija(List<Character> tyavuorolista, int paivaNro) {
         boolean yoVuorotLoppu = false;
         int putkenSakot = 0;
-        System.out.println("yoPutkenTutkija alotettu putkella: " + tyavuorolista + " alkupaivanro: " + paivaNro);
+        //System.out.println("yoPutkenTutkija alotettu: " + tyavuorolista + " alkupaivanro: " + paivaNro);
 
         List<Character> yoPutki = new ArrayList<>();
 
@@ -111,15 +128,15 @@ public class Alyttomat {
         // Sitä enempi penaltia mitä isompi suhde öitte ja vapaitte välil
         if (yot > vapaaPaivat) {
             putkenSakot = putkenSakot + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE);
-            System.out.println("! n:n yövuoron jälkeen oltava vähintään n vapaapäivää =" + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE) + " sakkoa");
+            System.out.println("! n:n yövuoron jälkeen oltava vähintään n vapaapäivää = " + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE) + " sakkoa");
         }
         if (yot > vapaaPaivat + 1) {
             putkenSakot = putkenSakot + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE);
-            System.out.println("! yövuoron jälkeen oltava vähintään n-1 vapaapäivää =" + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE) + " sakkoa");
+            System.out.println("! yövuoron jälkeen oltava vähintään n-1 vapaapäivää = " + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE) + " sakkoa");
         }
         if (yot > vapaaPaivat + 2) {
             putkenSakot = putkenSakot + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE);
-            System.out.println("! n:n yövuoron jälkeen oltava vähintään n-2 vapaapäivää =" + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE) + " sakkoa");
+            System.out.println("! n:n yövuoron jälkeen oltava vähintään n-2 vapaapäivää = " + ((yot - vapaaPaivat) * Kerroin.VAPAA_VIRHE) + " sakkoa");
         }
 
         if (!YOVUOROJEN_TARKOITAA_VAIN_MONKIKKOA) {
@@ -128,11 +145,11 @@ public class Alyttomat {
             // Sitä enempi penaltia mitä pidempi yärupeama
             if (vapaaPaivat < 1) {
                 putkenSakot = putkenSakot + (yot * Kerroin.VAPAA_VIRHE);
-                System.out.println("! yövuorojen jälkeen oltava vähintään 1 vapaapäivää =" + (yot * Kerroin.VAPAA_VIRHE) + " sakkoa");
+                System.out.println("! yövuorojen jälkeen oltava vähintään 1 vapaapäivää = " + (yot * Kerroin.VAPAA_VIRHE) + " sakkoa");
             }
             if (vapaaPaivat < 2) {
                 putkenSakot = putkenSakot + (yot * Kerroin.VAPAA_VIRHE);
-                System.out.println("! yövuorojen jälkeen oltava vähintään 2 vapaapäivää =" + (yot * Kerroin.VAPAA_VIRHE) + " sakkoa");
+                System.out.println("! yövuorojen jälkeen oltava vähintään 2 vapaapäivää = " + (yot * Kerroin.VAPAA_VIRHE) + " sakkoa");
             }
 
             //•	yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää
@@ -140,17 +157,17 @@ public class Alyttomat {
             if (Saanto.NUKKUMAPAIVA_OLTAVA) {
                 if (nukkumaPaivat != 1 && vapaaPaivat < 2) {
                     putkenSakot = putkenSakot + (yot * Kerroin.NUKKUMA_VIRHE);
-                    System.out.println("! yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää =" + (yot * Kerroin.NUKKUMA_VIRHE) + " sakkoa");
+                    System.out.println("! yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää = " + (yot * Kerroin.NUKKUMA_VIRHE) + " sakkoa");
                 }
 
                 if (nukkumaPaivat != 1 && vapaaPaivat < 1) {
                     putkenSakot = putkenSakot + (yot * Kerroin.NUKKUMA_VIRHE);
-                    System.out.println("! yövuorojen jälkeen oltava nukkumapäivä + vähintään 1 vapaapäivä =" + (yot * Kerroin.NUKKUMA_VIRHE) + " sakkoa");
+                    System.out.println("! yövuorojen jälkeen oltava nukkumapäivä + vähintään 1 vapaapäivä = " + (yot * Kerroin.NUKKUMA_VIRHE) + " sakkoa");
                 }
             }
         }
         YokasittelynTulos yokasittelynTulos = new YokasittelynTulos(yoPutki, putkenSakot);
-        System.out.println("Putkessa Yot: " + yot + " NukuP: " + nukkumaPaivat + " Vapaat: " + vapaaPaivat);
+        System.out.println("Putkessa Yovuorot: " + yot + " Nukkumapaivat: " + nukkumaPaivat + " Vapaat: " + vapaaPaivat);
         System.out.println(yokasittelynTulos + "\n");
 
         return yokasittelynTulos;

@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static fi.nukkujat.Const.Saanto;
-import static fi.nukkujat.HelpMeh.stringToCharList;
+import static fi.nukkujat.HelpMe.stringToCharList;
 import static org.junit.Assert.assertEquals;
 
 public class SakkoTest {
