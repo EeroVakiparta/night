@@ -44,7 +44,7 @@ public class HelpMe {
     }
 
     public static String rVuoroLista(int l) {
-        String mahdollisetPaivat ="myvn";
+        String mahdollisetPaivat = "myvn";
         StringBuilder s = new StringBuilder();
         Random r = new Random();
         for (int i = 0; i < l; i++) {

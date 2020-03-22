@@ -18,12 +18,13 @@ public class Alyttomat {
 
     /**
      * Kuinka huono lista int.
-     *
+     * <p>
      * Yrittää kertoa kuinka huono annettu vuorolista on
      * Löydetyt yövuorot tutkitaan vertaamalla niitä sääntöihin
      * Palautetaan löydettyjen yövuoroputkien yhteen lasketut sakkopisteet
-     * paljon sakkopisteitä -> huonompi vuorolista
-     *
+     * Paljon sakkopisteitä -> huonompi vuorolista
+     * Nopeamman saa aina tehtyä myähemmi
+     * <p>
      * @param tyavuorolista   the tyavuorolista
      * @param aloitusPaivaNro the aloitus paiva nro
      * @return the int

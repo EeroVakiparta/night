@@ -27,7 +27,7 @@ public class Const {
         public final static int YOVUORO_VIRHE = 1;
     }
 
-    public static class AloitusPaiva {
+    public static class AloitusPaiva { //TODO: to be implemented, myöhempää työnantajan menojen laskentaa varten
         public final static int MAANANTAI = 0;
         public final static int TIISTAI = 1;
         public final static int KESKIVIIKKO = 2;
