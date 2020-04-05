@@ -24,6 +24,8 @@ public class Main {
      * Vuorot[] = edeltävistä kirjain ja numeroyhdistelmistä koostuvat yksittäiset vuoro päiväjärjestyksessä
      * <p>
      * Tyhjien arvojen kohdalla on välilyönti jotta pyyntöä vastaavan todellisen vuoron näkisi helpommin.
+     * Esimerkki: A1p+ = Vuoro A, Ryhmä 1, priorisoitu, toteutui
+     *
      * Testidataa voi tehdä excelillä exporttaamalla csv kaltaista tietoa
      *
      * @param args the args

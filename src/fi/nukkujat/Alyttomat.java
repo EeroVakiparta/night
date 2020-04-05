@@ -230,11 +230,11 @@ public class Alyttomat {
                         sakko = sakko + (1 * Kerroin.PRIORISOINTI_VIRHE);
                         prioriteettejaRikottu++;
                         paivasakko++;
-                        System.out.println("! priorisoitua ryhmää ei toteltu = " + (1 * Kerroin.PRIORISOINTI_VIRHE) + " sakkoa");
+                        System.out.println("! priorisoitua ryhmää ei toteltu = " + (1 * Kerroin.PRIORISOINTI_VIRHE) + " sakkoa (" + tyoVuoro.getVuoroRyhma() + " != " + toive.getVuoroRyhma() + ")");
                     } else {
                         sakko = sakko + (1 * Kerroin.SOFTI_TOIVE_VIRHE);
                         paivasakko++;
-                        System.out.println("! ryhmäpyyntöön ei vastatu = " + (1 * Kerroin.SOFTI_TOIVE_VIRHE) + " sakkoa");
+                        System.out.println("! ryhmäpyyntöön ei vastatu = " + (1 * Kerroin.SOFTI_TOIVE_VIRHE) + " sakkoa (" + tyoVuoro.getVuoroRyhma() + " != " + toive.getVuoroRyhma()+ ")");
                     }
                 }
             }
@@ -246,13 +246,13 @@ public class Alyttomat {
                     sakko = sakko + (1 * Kerroin.PRIORISOINTI_VIRHE);
                     prioriteettejaRikottu++;
                     paivasakko++;
-                    System.out.println("! priorisoitua vuoroa ei toteltu = " + (1 * Kerroin.PRIORISOINTI_VIRHE) + " sakkoa");
+                    System.out.println("! priorisoitua vuoroa ei toteltu = " + (1 * Kerroin.PRIORISOINTI_VIRHE) + " sakkoa (" + tyoVuoro.getVuoroTyyppi() + " != " + toive.getVuoroTyyppi()+ ")");
                 // • normaali vapaapäivätoive eli olisi kiva, jos toive toteutuisi.
                 // • normaali työvuorotoive eli olisi kiva, jos toive toteutuisi.
                 } else {
                     sakko = sakko + (1 * Kerroin.SOFTI_TOIVE_VIRHE);
                     paivasakko++;
-                    System.out.println("! vuoropyyntöön ei vastatu = " + (1 * Kerroin.SOFTI_TOIVE_VIRHE) + " sakkoa");
+                    System.out.println("! vuoropyyntöön ei vastatu = " + (1 * Kerroin.SOFTI_TOIVE_VIRHE) + " sakkoa (" + tyoVuoro.getVuoroTyyppi() + " != " + toive.getVuoroTyyppi()+ ")");
                 }
             }
             if (paivasakko == 0) {
