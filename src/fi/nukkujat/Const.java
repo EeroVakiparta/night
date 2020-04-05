@@ -22,9 +22,12 @@ public class Const {
 
     //Jos nyt ymmärsin virheen vakavuuden väärin ja sitä täytyy nopeasti vakavoittaa
     public static class Kerroin {
-        public final static int NUKKUMA_VIRHE = 1;
-        public final static int VAPAA_VIRHE = 1;
-        public final static int YOVUORO_VIRHE = 1;
+        public final static int LEKA = 100;
+        public final static int NUKKUMA_VIRHE = 1;  // Kyngas ei nahtavasti paljoa nukkumisista suuttunu
+        public final static int VAPAA_VIRHE = 2;
+        public final static int YOVUORO_VIRHE = 3;
+        public final static int PRIORISOINTI_VIRHE = LEKA;
+        public final static int SOFTI_TOIVE_VIRHE = 1;
     }
 
     public static class AloitusPaiva { //TODO: to be implemented, myöhempää työnantajan menojen laskentaa varten

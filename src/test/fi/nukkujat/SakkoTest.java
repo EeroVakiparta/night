@@ -1,4 +1,4 @@
-package test.fi.nukkujat;
+package fi.nukkujat;
 
 import fi.nukkujat.Alyttomat;
 import org.junit.Test;
@@ -14,19 +14,19 @@ public class SakkoTest {
     @Test
     public void t1_ioob() throws Exception {
         List<Character> testiLista = stringToCharList("yyyyy");
-        assertEquals(35, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(60, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
     public void t2_yoloppuu() throws Exception {
         List<Character> testiLista = stringToCharList("yym");
-        assertEquals(12, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(20, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
     public void t3_kaksiYoputki() throws Exception {
         List<Character> testiLista = stringToCharList("yymyy");
-        assertEquals(24, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(40, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
@@ -48,19 +48,19 @@ public class SakkoTest {
     @Test
     public void t6_vapaaPaivat_n() throws Exception {
         List<Character> testiLista = stringToCharList("yyyyvvv");
-        assertEquals(1, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(2, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
     public void t7_vapaaPaivat_nMinusYks() throws Exception {
         List<Character> testiLista = stringToCharList("yyyyvv");
-        assertEquals(4, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(8, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
     public void t8_vapaaPaivat_nMinusKaks() throws Exception {
         List<Character> testiLista = stringToCharList("yyyyv");
-        assertEquals(17, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(30, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
@@ -72,19 +72,19 @@ public class SakkoTest {
     @Test
     public void t10_JS_koodarin_tyovuorlista() throws Exception {
         List<Character> testiLista = stringToCharList("mvvvyyymmymvyvmmmyyvyvvmyvvvmym");
-        assertEquals(38, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(63, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
     public void t11_JS_tyoharjoittelijan_tyovuorlista() throws Exception {
         List<Character> testiLista = stringToCharList("yymvyyvyvvmvvvyyymyyyyyyyyymyvy");
-        assertEquals(107, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(187, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
     public void t12_JS_tyoharjoittelijan_tyovuorlista_toinenKesaToissa() throws Exception {
         List<Character> testiLista = stringToCharList("mvmyvvvyyyvvymyymvmvyyyvvvmyvmy");
-        assertEquals(19, Alyttomat.kuinkaHuonoLista(testiLista, 0));
+        assertEquals(31, Alyttomat.kuinkaHuonoLista(testiLista, 0));
     }
 
     @Test
