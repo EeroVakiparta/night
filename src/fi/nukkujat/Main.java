@@ -1,7 +1,9 @@
 package fi.nukkujat;
 
-import static fi.nukkujat.Alyttomat.kuinkaHuonoLista;
-import static fi.nukkujat.HelpMe.stringToCharList;
+import java.io.IOException;
+import java.util.List;
+
+import static fi.nukkujat.HelpMe.readCSV;
 
 public class Main {
 
@@ -15,9 +17,16 @@ public class Main {
      *
      * @param args the args
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
 
-        String randomTyovuorolista = HelpMe.rVuoroLista(20);
+        List<Toive> toiveet = readCSV("toiveet.txt");
+
+        for (Toive t : toiveet) {
+            System.out.println(t);
+        }
+/*
+
+        String randomTyovuorolista = HelpMe.rVuoroLista(30);
         String vuoden_1979_Finnair_tyovuoromalli = "mmmmmvvyyyyyvmmmmmvvmmmmmvv";
         String industryFastForwardsRotating = "mmmmyynvvvmmmmyynvvvm";
         String industrySlowBackwardsRotating = "mmmmvmmmmvyyyynvvvvvm";
@@ -40,5 +49,8 @@ public class Main {
         //        kuinkaHuonoLista(stringToCharList("yyynvv"));
         //
         //        kuinkaHuonoLista(stringToCharList("yyynv"));
+
+
+ */
     }
 }

@@ -41,3 +41,8 @@ Yövuoroputkia löydetty = 1 kpl
 ```
 
 Laskentaa ja painoarvoja voi säätää muuttamalla fi.nukkujat.Cont -luokasta löytyviä muuttujia.
+
+#####FAQ:
+Is a CSV file a text file?
+
+"A comma-separated values (CSV) file is a delimited text file that uses a comma to separate values." -rfc4180
