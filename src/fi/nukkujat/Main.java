@@ -23,16 +23,18 @@ public class Main {
 
         List<Toive> toiveet = readToiveet("src/resources/toiveet.txt");
         List<TyoVuoro> vuorot = readTyoVuorot("src/resources/tyovuorolista1.txt");
-        for (Toive t : toiveet) {
-            System.out.println(t);
-        }
 
-        for (TyoVuoro v : vuorot) {
-            System.out.println(v);
-        }
+        System.out.println("\nYo ja toive sakot yhteensä: " + (kuinkaHuonoLista(vuorot) + kuinkaVihainenTyolainen(vuorot, toiveet).toiveSakot));
 
-        kuinkaVihainenTyolainen(vuorot, toiveet);
-        kuinkaHuonoLista(vuorot);
+//        for (Toive t : toiveet) {
+//            System.out.println(t);
+//        }
+//
+//        for (TyoVuoro v : vuorot) {
+//            System.out.println(v);
+//        }
+
+
 
 
 //        String randomTyovuorolista = HelpMe.rVuoroLista(30);

@@ -22,7 +22,7 @@ public class Const {
 
     //Jos nyt ymmärsin virheen vakavuuden väärin ja sitä täytyy nopeasti vakavoittaa
     public static class Kerroin {
-        public final static int NUKKUMA_VIRHE = 1;
+        public final static int NUKKUMA_VIRHE = 1;  // Kyngas ei nahtavasti paljoa nukkumisista suuttunu
         public final static int VAPAA_VIRHE = 1;
         public final static int YOVUORO_VIRHE = 1;
         public final static int PRIORISOINTI_VIRHE = 100;

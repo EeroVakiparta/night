@@ -50,7 +50,7 @@ public class TyoVuoro {
 
     private String vuoroRyhmaString() {
         if (this.vuoroRyhma == 0) {
-            return "";
+            return " ";
         }else {
             return String.valueOf(this.vuoroRyhma);
         }
@@ -58,6 +58,6 @@ public class TyoVuoro {
 
     @Override
     public String toString() {
-        return "" + toUpperCase(vuoroTyyppi)  + vuoroRyhmaString();
+        return "" + toUpperCase(vuoroTyyppi)  + vuoroRyhmaString() + " ";
     }
 }

@@ -27,7 +27,8 @@ public class Alyttomat {
      * @return the int
      */
     public static int kuinkaHuonoLista(List<Character> tyavuorolista, int aloitusPaivaNro) { //TODO: aloitusPaivaNro = palkka+pyhat
-        System.out.println("\nkuinkaHuonoLista =" + tyavuorolista);
+        //System.out.println("\nkuinkaHuonoLista =" + tyavuorolista);
+        System.out.println("\nkuinkaHuonoLista ");
         int sakko = 0;
         int latestSakko = 0;
         int yorimpsujenLkm = 0;
@@ -61,7 +62,7 @@ public class Alyttomat {
         }
 
         System.out.println("Yövuoroputkia löydetty = " + yorimpsujenLkm + " kpl");
-        System.out.println(">>> Sakkoa yhteensä = " + sakko + " <<<<\n");
+        System.out.println("YoSakkoa yhteensä = " + sakko + "\n");
         return sakko;
     }
 
@@ -173,7 +174,7 @@ public class Alyttomat {
 
     public static int kuinkaHuonoLista(List<TyoVuoro> tyoVuoroList) {
         List<Character> vuoroLista = TyoVuorolistaToVuoroLista(tyoVuoroList);
-        System.out.println(tyoVuoroList);
+        System.out.println("\nVuorot=  " + tyoVuoroList);
         int aloitusPaivaNro = 0; //TODO: aloitusPaivaNro = palkka+pyhat
         return kuinkaHuonoLista(vuoroLista, aloitusPaivaNro);
     }

@@ -46,7 +46,7 @@ public class Toive {
 
     private String vuoroRyhmaString() {
         if (this.vuoroRyhma == 0) {
-            return "";
+            return " ";
         }else {
             return String.valueOf(this.vuoroRyhma);
         }
@@ -54,7 +54,7 @@ public class Toive {
 
     private String prioString() {
         if (!this.priorisoitu) {
-            return "";
+            return " ";
         }else {
             return "p";
         }
