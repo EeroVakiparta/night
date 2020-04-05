@@ -9,6 +9,7 @@ public class Toive {
     private Character vuoroTyyppi;
     private int vuoroRyhma;
     private Boolean priorisoitu;
+    private Boolean totetunut;
 
     public Character getVuoroTyyppi() {
         return vuoroTyyppi;
@@ -34,10 +35,19 @@ public class Toive {
         this.priorisoitu = priorisoitu;
     }
 
-    public Toive(Character vuoroTyyppi, int vuoroRyhma, Boolean priorisoitu) {
+    public Boolean getTotetunut() {
+        return totetunut;
+    }
+
+    public void setTotetunut(Boolean totetunut) {
+        this.totetunut = totetunut;
+    }
+
+    public Toive(Character vuoroTyyppi, int vuoroRyhma, Boolean priorisoitu, Boolean totetunut) {
         this.vuoroTyyppi = vuoroTyyppi;
         this.vuoroRyhma = vuoroRyhma;
         this.priorisoitu = priorisoitu;
+        this.totetunut = totetunut;
     }
 
     public Boolean isFree() {
@@ -60,9 +70,17 @@ public class Toive {
         }
     }
 
+    private String toteutuString() {
+        if (!this.totetunut) {
+            return " ";
+        }else {
+            return "+";
+        }
+    }
+
     @Override
     public String toString() {
-        return "" + toUpperCase(vuoroTyyppi)  + vuoroRyhmaString() + prioString();
+        return "" + toUpperCase(vuoroTyyppi)  + vuoroRyhmaString() + prioString() + toteutuString();
     }
 
     @Override

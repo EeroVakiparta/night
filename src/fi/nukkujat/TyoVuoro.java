@@ -58,6 +58,6 @@ public class TyoVuoro {
 
     @Override
     public String toString() {
-        return "" + toUpperCase(vuoroTyyppi)  + vuoroRyhmaString() + " ";
+        return "" + toUpperCase(vuoroTyyppi)  + vuoroRyhmaString() + "  ";
     }
 }
