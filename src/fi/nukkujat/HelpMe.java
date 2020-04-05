@@ -12,6 +12,7 @@ import java.util.Random;
 
 import static fi.nukkujat.Const.Saanto.VIIKONLOPUT_VAPAAT_EIKA_LISTASSA;
 import static fi.nukkujat.Const.Vuoro.VAPAA;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 
 public class HelpMe {
     public static List<Character> viikonlopunLisaaja(List<Character> tyavuorolista, int aloitusPaiva) {
@@ -83,7 +84,7 @@ public class HelpMe {
         if (toiveet[1].equals("1")) {
             prio = true;
         }
-        return new Toive(toiveet[0], prio);
+        return new Toive(toLowerCase(toiveet[0]),Integer.parseInt(toiveet[1]), prio);
     }
 
 }

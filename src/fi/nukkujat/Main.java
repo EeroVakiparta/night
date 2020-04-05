@@ -3,7 +3,9 @@ package fi.nukkujat;
 import java.io.IOException;
 import java.util.List;
 
+import static fi.nukkujat.Alyttomat.kuinkaHuonoLista;
 import static fi.nukkujat.HelpMe.readCSV;
+import static fi.nukkujat.HelpMe.stringToCharList;
 
 public class Main {
 
@@ -24,7 +26,7 @@ public class Main {
         for (Toive t : toiveet) {
             System.out.println(t);
         }
-/*
+
 
         String randomTyovuorolista = HelpMe.rVuoroLista(30);
         String vuoden_1979_Finnair_tyovuoromalli = "mmmmmvvyyyyyvmmmmmvvmmmmmvv";
@@ -51,6 +53,6 @@ public class Main {
         //        kuinkaHuonoLista(stringToCharList("yyynv"));
 
 
- */
+
     }
 }
