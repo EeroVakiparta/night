@@ -12,7 +12,6 @@ import java.util.Random;
 
 import static fi.nukkujat.Const.Saanto.VIIKONLOPUT_VAPAAT_EIKA_LISTASSA;
 import static fi.nukkujat.Const.Vuoro.VAPAA;
-import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 
 public class HelpMe {
     public static List<Character> viikonlopunLisaaja(List<Character> tyavuorolista, int aloitusPaiva) {
@@ -61,30 +60,167 @@ public class HelpMe {
         return s.toString();
     }
 
-    public static List<Toive> readCSV(String fileName) throws IOException {
+    public static List<Character> TyoVuorolistaToVuoroLista(List<TyoVuoro> tyoVuoroList) {
+        List<Character> charTyovuoroLista = new ArrayList<>();
+        for (TyoVuoro tv : tyoVuoroList) {
+            charTyovuoroLista.add(tv.getVuoroTyyppi());
+        }
+        return charTyovuoroLista;
+    }
+
+    public static List<Toive> readToiveet(String fileName) throws IOException {
         List<Toive> toiveet = new ArrayList<>();
         Path filePath = Paths.get(fileName);
         System.out.println(filePath.toAbsolutePath());
         BufferedReader br = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII);
-            // read the first line from the text file
-            String line = br.readLine(); // loop until all lines are read
-            while (line != null) {
-                // use string.split to load a string array with the values from // each line of // the file, using a comma as the delimiter
-                String[] attributes = line.split(";");
-                Toive toive = makeAWish(attributes); // adding book into ArrayList
-                toiveet.add(toive); // read next line before looping // if end of file reached, line would be null
-                line = br.readLine();
-            }
+        // read the first line from the text file
+        String line = br.readLine(); // loop until all lines are read
+        while (line != null) {
+            // use string.split to load a string array with the values from // each line of // the file, using a comma as the delimiter
+            String[] attributes = line.split(";");
+            Toive toive = makeAWish(attributes); // adding book into ArrayList
+            toiveet.add(toive); // read next line before looping // if end of file reached, line would be null
+            line = br.readLine();
+        }
 
         return toiveet;
     }
 
+    public static List<TyoVuoro> readTyoVuorot(String fileName) throws IOException {
+        List<TyoVuoro> vuorot = new ArrayList<>();
+        Path filePath = Paths.get(fileName);
+        System.out.println(filePath.toAbsolutePath());
+        BufferedReader br = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII);
+        // read the first line from the text file
+        String line = br.readLine(); // loop until all lines are read
+        while (line != null) {
+            // use string.split to load a string array with the values from // each line of // the file, using a comma as the delimiter
+            String[] attributes = line.split(";");
+            TyoVuoro vuoro = makeAVuoro(attributes); // adding book into ArrayList
+            vuorot.add(vuoro); // read next line before looping // if end of file reached, line would be null
+            line = br.readLine();
+        }
+
+        return vuorot;
+    }
+
+    public static TyoVuoro makeAVuoro(String[] vuorot) {
+        Character c = vuorot[0].charAt(0);
+        return new TyoVuoro(Character.toLowerCase(c), Integer.parseInt(vuorot[1]));
+    }
+
     public static Toive makeAWish(String[] toiveet) {
+        Character c = toiveet[0].charAt(0);
         Boolean prio = false;
         if (toiveet[1].equals("1")) {
             prio = true;
         }
-        return new Toive(toLowerCase(toiveet[0]),Integer.parseInt(toiveet[1]), prio);
+        return new Toive(Character.toLowerCase(c), Integer.parseInt(toiveet[1]), prio);
     }
 
+    public static List<TyoVuoro> makeRandomVuoroLista(int paivaLkm, String mahdollisetVuorot, int vuoroRyhmalkma) throws huonotParametritException {
+        List<TyoVuoro> tyovuoroLista = new ArrayList<>();
+        for (int i = 0; i < paivaLkm; i++ ) {
+            tyovuoroLista.add( makeARandomVuoro(mahdollisetVuorot, vuoroRyhmalkma));
+        }
+        return tyovuoroLista;
+    }
+
+    public static List<Toive> makeRandomToiveLista(int paivaLkm, String mahdollisetVuorot, int vuoroRyhmalkma) throws huonotParametritException {
+        List<Toive> toiveLista = new ArrayList<>();
+        for (int i = 0; i < paivaLkm; i++ ) {
+            toiveLista.add( makeARandomWish(mahdollisetVuorot, vuoroRyhmalkma));
+        }
+        return toiveLista;
+    }
+
+    public static List<TyoVuoro> makeRandomVuoroLista(int paivaLkm, String mahdollisetVuorot, int vuoroRyhmalkma, int seed) throws huonotParametritException {
+        List<TyoVuoro> tyovuoroLista = new ArrayList<>();
+        for (int i = 0; i < paivaLkm; i++ ) {
+            tyovuoroLista.add( makeARandomVuoro(mahdollisetVuorot, vuoroRyhmalkma,seed));
+            seed = seed + 2;
+        }
+        return tyovuoroLista;
+    }
+
+    public static List<Toive> makeRandomToiveLista(int paivaLkm, String mahdollisetVuorot, int vuoroRyhmalkma, int seed) throws huonotParametritException {
+        List<Toive> toiveLista = new ArrayList<>();
+        for (int i = 0; i < paivaLkm; i++ ) {
+            toiveLista.add( makeARandomWish(mahdollisetVuorot, vuoroRyhmalkma,seed));
+            seed = seed + 2;
+        }
+        return toiveLista;
+    }
+
+    public static TyoVuoro makeARandomVuoro(String mahdollisetVuorot, int vuoroRyhmalkm) throws huonotParametritException {
+        Random random = new Random();
+        int seed = random.nextInt();
+        return makeARandomVuoro(mahdollisetVuorot,vuoroRyhmalkm,seed);
+    }
+
+    public static Toive makeARandomWish(String mahdollisetVuorot, int vuoroRyhmalkm) throws huonotParametritException {
+        Random random = new Random();
+        int seed = random.nextInt();
+        return makeARandomWish(mahdollisetVuorot,vuoroRyhmalkm,seed);
+    }
+
+    public static TyoVuoro makeARandomVuoro(String mahdollisetVuorot, int vuoroRyhmalkm, int seed) throws huonotParametritException {
+        validateRandomParams(mahdollisetVuorot, vuoroRyhmalkm);
+        Random random = new Random(seed);
+        int index = random.nextInt(mahdollisetVuorot.length());
+        Character arvottuVuoro = mahdollisetVuorot.charAt(index);
+        int vuoroRyhma = random.nextInt(vuoroRyhmalkm ) + 3;
+        return new TyoVuoro(arvottuVuoro,vuoroRyhma);
+    }
+
+    public static Toive makeARandomWish(String mahdollisetVuorot, int vuoroRyhmalkm, int seed) throws huonotParametritException {
+        validateRandomParams(mahdollisetVuorot, vuoroRyhmalkm);
+        Random random = new Random(seed);
+        int index = random.nextInt(mahdollisetVuorot.length());
+        Character arvottuVuoro = mahdollisetVuorot.charAt(index);
+
+        Boolean prio = random.nextBoolean();
+        return new Toive(arvottuVuoro, randomVuoroRyhma(vuoroRyhmalkm,seed), prio);
+    }
+
+    public static int  randomVuoroRyhma(int vuorojenMaara, int seed) {
+        Random random = new Random(seed);
+        int vuoroRyhma = 0;
+        boolean tuittuPaaTyontekija = random.nextBoolean();
+        if (tuittuPaaTyontekija) {
+            vuoroRyhma = random.nextInt(vuorojenMaara ) + 3;
+        }
+        return vuoroRyhma;
+    }
+
+    public static void validateRandomParams(String mahdollisetVuorot, int vuoroRyhma) throws huonotParametritException {
+        if (mahdollisetVuorot.length() > 30 || mahdollisetVuorot.length() < 3) {
+            throw new huonotParametritException("Vaara maara erilaisia tyovuoroja =" + mahdollisetVuorot.length());
+        }else if (vuoroRyhma < 3 || vuoroRyhma > 6) {
+            throw new huonotParametritException("Vaara maara erilaisia vuororyhmia =" + vuoroRyhma);
+        }else if (!onNukkumaYovapaa(mahdollisetVuorot)) {
+            throw new huonotParametritException("Pakolliset vuorot puuttuvat =" + mahdollisetVuorot);
+        }
+    }
+
+    public static boolean onNukkumaYovapaa(String vuorot) {
+        int s = 0;
+        for (int i = 0; i < vuorot.length(); i++) {
+            char c = vuorot.charAt(i);
+            if (c == 'n' || c == 'y' || c == 'v') {
+                s++;
+            }
+        }
+        if (s == 3) {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+class huonotParametritException extends Exception {
+    public huonotParametritException(String message) {
+        super(message);
+    }
 }

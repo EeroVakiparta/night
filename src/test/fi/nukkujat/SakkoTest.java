@@ -1,4 +1,4 @@
-package test.fi.nukkujat;
+package fi.nukkujat;
 
 import fi.nukkujat.Alyttomat;
 import org.junit.Test;

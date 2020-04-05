@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import static fi.nukkujat.Alyttomat.kuinkaHuonoLista;
-import static fi.nukkujat.HelpMe.readCSV;
-import static fi.nukkujat.HelpMe.stringToCharList;
+import static fi.nukkujat.Alyttomat.kuinkaVihainenTyolainen;
+import static fi.nukkujat.HelpMe.*;
 
 public class Main {
 
@@ -21,38 +21,36 @@ public class Main {
      */
     public static void main(String args[]) throws IOException {
 
-        List<Toive> toiveet = readCSV("toiveet.txt");
-
+        List<Toive> toiveet = readToiveet("src/resources/toiveet.txt");
+        List<TyoVuoro> vuorot = readTyoVuorot("src/resources/tyovuorolista1.txt");
         for (Toive t : toiveet) {
             System.out.println(t);
         }
 
+        for (TyoVuoro v : vuorot) {
+            System.out.println(v);
+        }
 
-        String randomTyovuorolista = HelpMe.rVuoroLista(30);
-        String vuoden_1979_Finnair_tyovuoromalli = "mmmmmvvyyyyyvmmmmmvvmmmmmvv";
-        String industryFastForwardsRotating = "mmmmyynvvvmmmmyynvvvm";
-        String industrySlowBackwardsRotating = "mmmmvmmmmvyyyynvvvvvm";
-
-        kuinkaHuonoLista(stringToCharList(randomTyovuorolista));
-        kuinkaHuonoLista(stringToCharList(vuoden_1979_Finnair_tyovuoromalli));
-        kuinkaHuonoLista(stringToCharList(industryFastForwardsRotating));
-        kuinkaHuonoLista(stringToCharList(industrySlowBackwardsRotating));
-
-        //        kuinkaHuonoLista(stringToCharList("yyynvv"));
-        //
-        //        kuinkaHuonoLista(stringToCharList("ynv"));
-        //
-        //        kuinkaHuonoLista(stringToCharList("yvv"));
-        //
-        //        kuinkaHuonoLista(stringToCharList("yv"));
-        //
-        //        kuinkaHuonoLista(stringToCharList("yyynvvv"));
-        //
-        //        kuinkaHuonoLista(stringToCharList("yyynvv"));
-        //
-        //        kuinkaHuonoLista(stringToCharList("yyynv"));
+        kuinkaVihainenTyolainen(vuorot, toiveet);
+        kuinkaHuonoLista(vuorot);
 
 
-
+//        String randomTyovuorolista = HelpMe.rVuoroLista(30);
+//        String vuoden_1979_Finnair_tyovuoromalli = "mmmmmvvyyyyyvmmmmmvvmmmmmvv";
+//        String industryFastForwardsRotating = "mmmmyynvvvmmmmyynvvvm";
+//        String industrySlowBackwardsRotating = "mmmmvmmmmvyyyynvvvvvm";
+//
+//        kuinkaHuonoLista(stringToCharList(randomTyovuorolista));
+//        kuinkaHuonoLista(stringToCharList(vuoden_1979_Finnair_tyovuoromalli));
+//        kuinkaHuonoLista(stringToCharList(industryFastForwardsRotating));
+//        kuinkaHuonoLista(stringToCharList(industrySlowBackwardsRotating));
+//
+//        kuinkaHuonoLista(stringToCharList("yyynvv"));
+//        kuinkaHuonoLista(stringToCharList("ynv"));
+//        kuinkaHuonoLista(stringToCharList("yvv"));
+//        kuinkaHuonoLista(stringToCharList("yv"));
+//        kuinkaHuonoLista(stringToCharList("yyynvvv"));
+//        kuinkaHuonoLista(stringToCharList("yyynvv"));
+//        kuinkaHuonoLista(stringToCharList("yyynv"));
     }
 }

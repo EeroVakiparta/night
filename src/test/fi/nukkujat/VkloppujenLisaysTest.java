@@ -1,4 +1,4 @@
-package test.fi.nukkujat;
+package fi.nukkujat;
 
 import fi.nukkujat.Alyttomat;
 import fi.nukkujat.HelpMe;
@@ -9,7 +9,7 @@ import java.util.List;
 import static fi.nukkujat.Const.AloitusPaiva;
 import static fi.nukkujat.HelpMe.stringToCharList;
 import static org.junit.Assert.assertEquals;
-
+//TODO: Doesn't work before the same is added to the wishes also
 //TODO: lisää inputti vaihtoehtoja
 public class VkloppujenLisaysTest {
 

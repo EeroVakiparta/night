@@ -8,14 +8,11 @@ import static fi.nukkujat.Const.Saanto;
 import static fi.nukkujat.Const.Saanto.NUKKUMAPAIVA_HYVAKSYTTAVA_VAIN_YON_JALKEEN;
 import static fi.nukkujat.Const.Saanto.YOVUOROJEN_TARKOITAA_VAIN_MONKIKKOA;
 import static fi.nukkujat.Const.Vuoro.*;
+import static fi.nukkujat.HelpMe.TyoVuorolistaToVuoroLista;
+import static fi.nukkujat.HelpMe.stringToCharList;
 
 
 public class Alyttomat {
-
-    public static int kuinkaHuonoLista(List<Character> tyavuorolista) {
-        return kuinkaHuonoLista(tyavuorolista, 0);
-    }
-
     /**
      * Kuinka huono lista int.
      * <p>
@@ -29,7 +26,7 @@ public class Alyttomat {
      * @param aloitusPaivaNro the aloitus paiva nro
      * @return the int
      */
-    public static int kuinkaHuonoLista(List<Character> tyavuorolista, int aloitusPaivaNro) { //TODO: aloitusPaivaNro palkka+pyhat
+    public static int kuinkaHuonoLista(List<Character> tyavuorolista, int aloitusPaivaNro) { //TODO: aloitusPaivaNro = palkka+pyhat
         System.out.println("\nkuinkaHuonoLista =" + tyavuorolista);
         int sakko = 0;
         int latestSakko = 0;
@@ -174,4 +171,54 @@ public class Alyttomat {
         return yokasittelynTulos;
     }
 
+    public static int kuinkaHuonoLista(List<TyoVuoro> tyoVuoroList) {
+        List<Character> vuoroLista = TyoVuorolistaToVuoroLista(tyoVuoroList);
+        System.out.println(tyoVuoroList);
+        int aloitusPaivaNro = 0; //TODO: aloitusPaivaNro = palkka+pyhat
+        return kuinkaHuonoLista(vuoroLista, aloitusPaivaNro);
+    }
+    public static int kuinkaHuonoLista(String tyoVuoroList) {
+        List<Character> tyoVuorot = stringToCharList(tyoVuoroList);
+        int aloitusPaivaNro = 0; //TODO: aloitusPaivaNro = palkka+pyhat
+        return kuinkaHuonoLista(tyoVuorot, aloitusPaivaNro);
+    }
+
+
+    public static ToiveidenTulos kuinkaVihainenTyolainen(List<TyoVuoro> tyavuorolista, List<Toive> toivelista) {
+        int sakko = 0;
+        int prioriteettejaRikottu = 0;
+
+        for (int i = 0 ; i < tyavuorolista.size(); i++) {
+            //Lukemisen helpottamiseksi:
+            TyoVuoro tyoVuoro = tyavuorolista.get(i);
+            Toive toive = toivelista.get(i);
+            Boolean priorisoitu = toive.getPriorisoitu();
+
+            // Jos työntekijä toivoo kuuluvansa johonkin ryhmään
+            if (toive.getVuoroRyhma() != 0) {
+                // Jos työntekijän ryhmätoivetta ei ole toteltu
+                if (toive.getVuoroRyhma() != tyoVuoro.getVuoroRyhma()) {
+                    sakko = sakko + 1;
+                    if (priorisoitu) {
+                        sakko = sakko + (1 * Kerroin.PRIORISOINTI_VIRHE);
+                        prioriteettejaRikottu++;
+                    }
+                }
+
+            }
+            // Jos työntekijän vuorotoivetta ei ole toteltu
+            if (!tyoVuoro.getVuoroTyyppi().equals(toive.getVuoroTyyppi())) {
+                sakko = sakko + 1;
+                if (priorisoitu) {
+                    sakko = sakko + (1 * Kerroin.PRIORISOINTI_VIRHE);
+                    prioriteettejaRikottu++;
+                }
+            }
+
+
+        }
+        ToiveidenTulos tulos = new ToiveidenTulos(toivelista,sakko,prioriteettejaRikottu);
+        System.out.println(tulos);
+        return tulos;
+    }
 }

@@ -25,6 +25,7 @@ public class Const {
         public final static int NUKKUMA_VIRHE = 1;
         public final static int VAPAA_VIRHE = 1;
         public final static int YOVUORO_VIRHE = 1;
+        public final static int PRIORISOINTI_VIRHE = 100;
     }
 
     public static class AloitusPaiva { //TODO: to be implemented, myöhempää työnantajan menojen laskentaa varten
