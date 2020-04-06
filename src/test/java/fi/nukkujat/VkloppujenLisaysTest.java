@@ -2,6 +2,7 @@ package fi.nukkujat;
 
 import fi.nukkujat.Alyttomat;
 import fi.nukkujat.HelpMe;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,28 +18,28 @@ public class VkloppujenLisaysTest {
     public void t15_yoViikkoViikonloputLasketaanMutEiListassa() throws Exception {
         List<Character> testiLista = stringToCharList("yyynv");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.MAANANTAI);
-        assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
+        Assert.assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
     public void t16_kaksViikkoaViikonloputLasketaanMutEiListassa() throws Exception {
         List<Character> testiLista = stringToCharList("mmmmmmyyyn");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.MAANANTAI);
-        assertEquals(2, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
+        Assert.assertEquals(2, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
     public void t17_kaksViikkoaViikonloputLasketaanMutEiListassaAlkaaPerjantaista() throws Exception {
         List<Character> testiLista = stringToCharList("mmmmmmyyynvvv");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.PERJANTAI);
-        assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
+        Assert.assertEquals(0, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
     @Test
     public void t18_kaksViikkoaViikonloputLasketaanMutEiListassaAlkaaSunnuntaista() throws Exception {
         List<Character> testiLista = stringToCharList("yyynvmmmmmynvm");
         List<Character> tuikittuLista = HelpMe.viikonlopunLisaaja(testiLista, AloitusPaiva.SUNNUNTAI);
-        assertEquals(2, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
+        Assert.assertEquals(2, Alyttomat.kuinkaHuonoLista(tuikittuLista, 0));
     }
 
 } 

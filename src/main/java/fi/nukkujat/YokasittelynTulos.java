@@ -13,7 +13,7 @@ final class YokasittelynTulos {
 
     @Override
     public String toString() {
-        return "YokasittelynTulos= " +
+        return "fi.nukkujat.YokasittelynTulos= " +
                 "putki: " + yoPutki +
                 " putkenSakot: " + yoPutkenSakot;
 

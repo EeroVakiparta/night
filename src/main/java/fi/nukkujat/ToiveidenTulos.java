@@ -1,5 +1,7 @@
 package fi.nukkujat;
 
+import fi.nukkujat.Toive;
+
 import java.util.List;
 
 final class ToiveidenTulos {
