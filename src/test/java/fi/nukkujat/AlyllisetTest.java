@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static fi.nukkujat.Alylliset.lihavoittaMatriisi;
-import static fi.nukkujat.Alylliset.readCVS;
+import static fi.nukkujat.Alylliset.*;
+import static fi.nukkujat.Main.tulosta;
 
 public class AlyllisetTest {
 
@@ -41,13 +41,12 @@ public class AlyllisetTest {
         Assert.assertEquals(irows, 12);
         Assert.assertEquals(icolumnsTop, 12);
         Assert.assertEquals(icolumnsBottom, 12);
-
-        //kevyt tarkastelu ettei hajoa muutoksista mitään
         for (int i = 0; i < size * 2 / 2; i++) {
             Assert.assertEquals(integers[i][0], integers[size + i][size]);
             Assert.assertEquals(integers[0][i], integers[size][size + i]);
             Assert.assertEquals(integers[i][i], integers[size + i][size + i]);
         }
+
         integers = lihavoittaMatriisi(luetutArvot, 3);
 
         irows = integers.length;
@@ -56,13 +55,25 @@ public class AlyllisetTest {
         Assert.assertEquals(irows, 18);
         Assert.assertEquals(icolumnsTop, 18);
         Assert.assertEquals(icolumnsBottom, 18);
-
-        //kevyt tarkastelu ettei hajoa muutoksista mitään
         for (int i = 0; i < size * 3 / 2; i++) {
             Assert.assertEquals(integers[i][0], integers[size + i][size]);
             Assert.assertEquals(integers[0][i], integers[size][size + i]);
             Assert.assertEquals(integers[i][i], integers[size + i][size + i]);
         }
+    }
 
+    @Test
+    public void t24_flipTheNumbersTest() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("lihavoitaTest.txt");
+
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 2);
+        tulosta(integers);
+        Assert.assertEquals(integers[0][0].intValue(), 1);
+        Assert.assertEquals(integers[11][11].intValue(), 11);
+
+        Integer[][] flippedIntegers = flipTheNumbers(integers,11);
+        tulosta(flippedIntegers);
+        Assert.assertEquals(flippedIntegers[0][0].intValue(), 10);
+        Assert.assertEquals(flippedIntegers[11][11].intValue(), 0);
     }
 }

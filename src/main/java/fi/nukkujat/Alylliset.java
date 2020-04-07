@@ -11,6 +11,17 @@ import java.util.List;
 
 public class Alylliset {
 
+    public static Integer[][] flipTheNumbers(Integer[][] matrix, int maxvalueToConvertZero) {
+        int size = matrix.length;
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = maxvalueToConvertZero - matrix[i][j];
+            }
+        }
+        return matrix;
+    }
+
 
     /**
      * Lihavoitta matriisi int [ ] [ ].

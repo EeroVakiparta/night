@@ -105,6 +105,7 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void tulosta(Integer[][] matrix) {
@@ -114,5 +115,6 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
