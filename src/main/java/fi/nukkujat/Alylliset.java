@@ -11,9 +11,51 @@ import java.util.List;
 
 public class Alylliset {
 
+
+    public static Integer[][] findSmallestInRowAndMakeItZero(Integer[][] matrix) {
+        int size = matrix.length;
+        for (int i = 0; i < size; i++) {
+            int smallest = Integer.MAX_VALUE;
+            for (int j = 0; j < size; j++) {
+                if( smallest > matrix[i][j]){
+                    smallest = matrix[i][j];
+                }
+            }
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = matrix[i][j] - smallest;
+            }
+        }
+        return matrix;
+    }
+
+    public static Integer[][] findSmallestInColumnAndMakeItZero(Integer[][] matrix) {
+        int size = matrix.length;
+        for (int i = 0; i < size; i++) {
+            Integer smallest = Integer.MAX_VALUE;
+            for (int j = 0; j < size; j++) {
+                if( smallest > matrix[j][i]){
+                    smallest = matrix[j][i];
+                }
+            }
+            for (int j = 0; j < size; j++) {
+                matrix[j][i] = matrix[j][i] - smallest;
+            }
+        }
+        return matrix;
+    }
+
+
+    /**
+     * Flip the numbers integer [ ] [ ].
+     *
+     * flips matrix upside down for better observation
+     *
+     * @param matrix                the matrix
+     * @param maxvalueToConvertZero the maxvalue to convert zero
+     * @return the integer [ ] [ ]
+     */
     public static Integer[][] flipTheNumbers(Integer[][] matrix, int maxvalueToConvertZero) {
         int size = matrix.length;
-
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 matrix[i][j] = maxvalueToConvertZero - matrix[i][j];
@@ -21,7 +63,6 @@ public class Alylliset {
         }
         return matrix;
     }
-
 
     /**
      * Lihavoitta matriisi int [ ] [ ].

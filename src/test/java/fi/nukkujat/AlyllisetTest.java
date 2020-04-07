@@ -29,18 +29,18 @@ public class AlyllisetTest {
         int rows = luetutArvot.size();
         int columnsTop = luetutArvot.get(0).size();
         int columnsBottom = luetutArvot.get(rows - 1).size();
-        Assert.assertEquals(rows, 6);
-        Assert.assertEquals(columnsTop, 6);
-        Assert.assertEquals(columnsBottom, 6);
+        Assert.assertEquals(6, rows);
+        Assert.assertEquals(6, columnsTop);
+        Assert.assertEquals(6, columnsBottom);
 
         Integer[][] integers = lihavoittaMatriisi(luetutArvot, 2);
 
         int irows = integers.length;
         int icolumnsTop = integers[0].length;
         int icolumnsBottom = integers[integers.length - 1].length;
-        Assert.assertEquals(irows, 12);
-        Assert.assertEquals(icolumnsTop, 12);
-        Assert.assertEquals(icolumnsBottom, 12);
+        Assert.assertEquals(12, irows);
+        Assert.assertEquals(12, icolumnsTop);
+        Assert.assertEquals(12, icolumnsBottom);
         for (int i = 0; i < size * 2 / 2; i++) {
             Assert.assertEquals(integers[i][0], integers[size + i][size]);
             Assert.assertEquals(integers[0][i], integers[size][size + i]);
@@ -71,9 +71,57 @@ public class AlyllisetTest {
         Assert.assertEquals(integers[0][0].intValue(), 1);
         Assert.assertEquals(integers[11][11].intValue(), 11);
 
-        Integer[][] flippedIntegers = flipTheNumbers(integers,11);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 11);
         tulosta(flippedIntegers);
-        Assert.assertEquals(flippedIntegers[0][0].intValue(), 10);
-        Assert.assertEquals(flippedIntegers[11][11].intValue(), 0);
+        Assert.assertEquals(10, flippedIntegers[0][0].intValue());
+        Assert.assertEquals(0, flippedIntegers[11][11].intValue());
     }
+
+    //TODO: refactor bad practise 3 testable features in one test
+    @Test
+    public void t25_findSmallestInRowAndMakeItZeroTest() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("zeroTest.txt");
+        //        82;83;69;92
+        //        77;37;49;92
+        //        11;69;5;86
+        //        8;9;98;23
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 1);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInRowAndMakeItZero = findSmallestInRowAndMakeItZero(flippedIntegers);
+        tulosta(smallestInRowAndMakeItZero);
+        //        10 9 23 0
+        //        15 55 43 0
+        //        75 17 81 0
+        //        90 89 0 75
+        //assert 4 new zeroes
+        Assert.assertEquals(0, smallestInRowAndMakeItZero[0][3].intValue());
+        Assert.assertEquals(0, smallestInRowAndMakeItZero[1][3].intValue());
+        Assert.assertEquals(0, smallestInRowAndMakeItZero[2][3].intValue());
+        Assert.assertEquals(0, smallestInRowAndMakeItZero[3][2].intValue());
+    }
+
+    //TODO: refactor bad practise 3 testable features in one test
+    @Test
+    public void t26_findSmallestInColumnAndMakeItZeroTest() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("zeroTest.txt");
+        //        82;83;69;92
+        //        77;37;49;92
+        //        11;69;5;86
+        //        8;9;98;23
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 1);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInColumnAndMakeItZero = findSmallestInColumnAndMakeItZero(flippedIntegers);
+        tulosta(smallestInColumnAndMakeItZero);
+        //        0 0 29 0
+        //        5 46 49 0
+        //        71 14 93 6
+        //        74 74 0 69
+        //assert 5 new zeroes
+        Assert.assertEquals(0, smallestInColumnAndMakeItZero[0][0].intValue());
+        Assert.assertEquals(0, smallestInColumnAndMakeItZero[0][1].intValue());
+        Assert.assertEquals(0, smallestInColumnAndMakeItZero[0][3].intValue());
+        Assert.assertEquals(0, smallestInColumnAndMakeItZero[1][3].intValue());
+        Assert.assertEquals(0, smallestInColumnAndMakeItZero[3][2].intValue());
+    }
+
 }
