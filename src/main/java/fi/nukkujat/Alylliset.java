@@ -29,15 +29,6 @@ public class Alylliset {
      * @return the int [ ] [ ]
      */
     public static Integer[][] lihavoittaMatriisi(List<List<Integer>> matrix, int kertaa) {
-        /*
-        int rivilkm = matrix.length;
-        int sarakelkm = matrix[0].length;
-
-        int[][] lihamaMatrix = matrix;
-        List[][] nakki = new ArrayList
-
-        List<List<Integer>> lihavoituMatrix = new ArrayList<>();
-        */
 
         Integer[][] arvot = new Integer[matrix.size() * kertaa][matrix.size() * kertaa];
 
@@ -47,30 +38,27 @@ public class Alylliset {
                 arvot[i][j] = list.get(j);
             }
         }
+        // Juu tää on ihan hirveä tiedetään, oli kiire
+        //TODO: refactor
+        //TODO: test if this works with bigger @kertaa than 2
         int x = 0;
         int y = 0;
         for (int i = arvot.length / kertaa; i < arvot.length; i++) {
             for (int j = arvot.length / kertaa; j < arvot.length; j++) {
                 arvot[i][j] = arvot[x][y];
                 arvot[x][j] = arvot[x][y];
-                //System.out.println("inserted value" + arvot[x][y] + "to index: " + (x) + "-" + j);
                 arvot[i][y] = arvot[x][y];
-                //System.out.println("inserted value" + arvot[x][y] + "to index: " + (x) + "-" + (j));
                 y++;
             }
             x++;
             y = 0;
         }
-
-
         return arvot;
     }
 
     public static List<List<Integer>> readCVS(String fileName) throws IOException {
-        //List<Integer[]> arvot = new ArrayList<>();
         List<List<Integer>> arvot = new ArrayList<>();
         Path filePath = Paths.get(fileName);
-        //System.out.println(filePath.toAbsolutePath());
         BufferedReader br = Files.newBufferedReader(filePath, StandardCharsets.US_ASCII);
         String line = br.readLine();
         while (line != null) {
@@ -79,8 +67,8 @@ public class Alylliset {
             for (String s : row) {
                 rowInt.add(Integer.parseInt(s));
             }
-            //Integer[] rowIntArray = rowInt.stream().toArray(n -> new Integer[n]);
-            //arvot.add(rowIntArray);
+            // Juu tää on ihan hirveä tiedetään, oli kiire
+            //TODO: refactor
             arvot.add(rowInt);
             line = br.readLine();
         }
