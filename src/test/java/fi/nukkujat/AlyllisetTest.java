@@ -3,9 +3,11 @@ package fi.nukkujat;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static fi.nukkujat.Alylliset.*;
+import static fi.nukkujat.HelpMe.teeKopio;
 import static fi.nukkujat.Main.tulosta;
 
 public class AlyllisetTest {
@@ -124,4 +126,153 @@ public class AlyllisetTest {
         Assert.assertEquals(0, smallestInColumnAndMakeItZero[3][2].intValue());
     }
 
+    @Test
+    public void t27_findSmallestAmountOfLinesToCoverAllZeroesTest() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("zeroTest.txt");
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 1);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInRowAndMakeItZero = findSmallestInRowAndMakeItZero(flippedIntegers);
+        tulosta(smallestInRowAndMakeItZero);
+        Integer[][] smallestInColumnAndMakeItZero = findSmallestInColumnAndMakeItZero(smallestInRowAndMakeItZero);
+        tulosta(smallestInColumnAndMakeItZero);
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroes = findSmallestAmountOfLinesToCoverAllZeroes(smallestInColumnAndMakeItZero);
+        tulosta(smallestInColumnAndMakeItZero,smallestAmountOfLinesToCoverAllZeroes);
+    }
+
+    @Test
+    public void t28_makeMoreZerosTest() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("zeroTest.txt");
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 1);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInRowAndMakeItZero = findSmallestInRowAndMakeItZero(flippedIntegers);
+        Integer[][] smallestInColumnAndMakeItZero = findSmallestInColumnAndMakeItZero(smallestInRowAndMakeItZero);
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroes = findSmallestAmountOfLinesToCoverAllZeroes(smallestInColumnAndMakeItZero);
+//        0 0 23 0
+//        5 46 43 0
+//        65 8 81 0
+//        80 80 0 75
+        Integer[][] moreZeros = makeMoreZeros(smallestInColumnAndMakeItZero, smallestAmountOfLinesToCoverAllZeroes);
+        tulosta(moreZeros);
+//        0 0 28 5
+//        0 41 43 0
+//        60 3 81 0
+//        75 75 0 75
+        Assert.assertEquals(28, moreZeros[0][2].intValue()); // + 5
+        Assert.assertEquals(5, moreZeros[0][3].intValue()); // + 5
+        Assert.assertEquals(0, moreZeros[1][0].intValue()); // - 5
+        Assert.assertEquals(3, moreZeros[2][1].intValue()); // - 5
+        Assert.assertEquals(75, moreZeros[3][3].intValue()); // +-0
+
+    }
+
+    @Test
+    public void t29_isEnoughLinesFound() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("zeroTest.txt");
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 1);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInRowAndMakeItZero = findSmallestInRowAndMakeItZero(flippedIntegers);
+        Integer[][] smallestInColumnAndMakeItZero = findSmallestInColumnAndMakeItZero(smallestInRowAndMakeItZero);
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroes = findSmallestAmountOfLinesToCoverAllZeroes(smallestInColumnAndMakeItZero);
+        Integer[][] moreZeros = makeMoreZeros(smallestInColumnAndMakeItZero, smallestAmountOfLinesToCoverAllZeroes);
+//        0 0 28 5
+//        0 41 43 0
+//        60 3 81 0
+//        75 75 0 75
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroesSecondRound = findSmallestAmountOfLinesToCoverAllZeroes(moreZeros);
+        boolean enoughLinesFound = isEnoughLinesFound(moreZeros, smallestAmountOfLinesToCoverAllZeroesSecondRound);
+        Assert.assertEquals(true, enoughLinesFound);
+        // Nollien ylivetämiseen tarvitaan nyt yhtä monta viivaa kuin matrixin koko
+        // Optimaalinen vastaus pitäisi nyt löytyä
+    }
+
+    @Test
+    public void t30_cellSelectiontest() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("zeroTest.txt");
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 1);
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInRowAndMakeItZero = findSmallestInRowAndMakeItZero(flippedIntegers);
+        Integer[][] smallestInColumnAndMakeItZero = findSmallestInColumnAndMakeItZero(smallestInRowAndMakeItZero);
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroes = findSmallestAmountOfLinesToCoverAllZeroes(smallestInColumnAndMakeItZero);
+        Integer[][] moreZeros = makeMoreZeros(smallestInColumnAndMakeItZero, smallestAmountOfLinesToCoverAllZeroes);
+//        0 0 28 5
+//        0 41 43 0
+//        60 3 81 0
+//        75 75 0 75
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroesSecondRound = findSmallestAmountOfLinesToCoverAllZeroes(moreZeros);
+        boolean enoughLinesFound = isEnoughLinesFound(moreZeros, smallestAmountOfLinesToCoverAllZeroesSecondRound);
+        Assert.assertEquals(true, enoughLinesFound);
+        Integer[] integers1 = selectTheCells(moreZeros);
+        for (Integer i : integers1) {
+            System.out.print(i + " ");
+        }
+        System.out.println("");
+    }
+
+    @Test
+    public void t31_firstAttemptOnTheAssignment() throws Exception {
+        List<List<Integer>> luetutArvot = readCVS("kaksitoistaGrid.txt");
+        Integer[][] integers = lihavoittaMatriisi(luetutArvot, 2);
+
+        Integer[][] kopio = teeKopio(integers);
+
+        Integer[][] flippedIntegers = flipTheNumbers(integers, 100);
+        Integer[][] smallestInRowAndMakeItZero = findSmallestInRowAndMakeItZero(flippedIntegers);
+        Integer[][] smallestInColumnAndMakeItZero = findSmallestInColumnAndMakeItZero(smallestInRowAndMakeItZero);
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroes = findSmallestAmountOfLinesToCoverAllZeroes(smallestInColumnAndMakeItZero);
+        Integer[][] moreZeros = makeMoreZeros(smallestInColumnAndMakeItZero, smallestAmountOfLinesToCoverAllZeroes);
+        List<Viiva> smallestAmountOfLinesToCoverAllZeroesSecondRound = findSmallestAmountOfLinesToCoverAllZeroes(moreZeros);
+        boolean enoughLinesFound = isEnoughLinesFound(moreZeros, smallestAmountOfLinesToCoverAllZeroesSecondRound);
+        while (!enoughLinesFound) {
+            makeMoreZeros(moreZeros, smallestAmountOfLinesToCoverAllZeroesSecondRound);
+            smallestAmountOfLinesToCoverAllZeroesSecondRound = findSmallestAmountOfLinesToCoverAllZeroes(moreZeros);
+            enoughLinesFound = isEnoughLinesFound(moreZeros, smallestAmountOfLinesToCoverAllZeroesSecondRound);
+        }
+        Assert.assertEquals(true, enoughLinesFound);
+        Integer[] integers1 = selectTheCells(moreZeros);
+
+        System.out.println("selectTheCells asnwer with amount of rows: " + integers1.length );
+        for (int i = 0; i < integers1.length; i++) {
+
+            System.out.println(integers1[i]);
+
+        }
+        System.out.println("" );
+
+
+        System.out.println(" Populating the answer grid with zeroes" );
+        Integer[][] answerCoordinates = new Integer[integers1.length][integers1.length];
+        for (int i = 0; i < answerCoordinates.length; i++) {
+            for (int j = 0; j < answerCoordinates.length; j++) {
+                answerCoordinates[i][j] = 0;
+
+            }
+        }
+        System.out.println(" Answer coordinates before applying answers" );
+        tulosta(answerCoordinates);
+        System.out.println("" );
+        for (int i = 0; i < integers1.length; i++) {
+            Integer integer = integers1[i];
+            answerCoordinates[integer][i] = 1;
+
+        }
+        //TÄSSÄ KOHTAA TAJUSIN ETTÄ NELJÄS NELJÄNNES TAITAA OLLA HUONO,
+        System.out.println(" vastaus koordinaatit");
+        tulosta(answerCoordinates);
+        System.out.println("");
+        System.out.println(" Loppuvastaus");
+        List<Integer> lopulliset = new ArrayList<>();
+        int total = 0;
+        for (int i = 0; i < answerCoordinates.length; i++) {
+            for (int j = 0; j < answerCoordinates.length; j++) {
+                if (answerCoordinates[i][j] == 1) {
+                    Integer integer = kopio[i][j];
+                    lopulliset.add(integer);
+                    total = total + integer;
+                }
+            }
+        }
+
+        System.out.println(lopulliset);
+        System.out.println("total: " + total);
+    }
 }

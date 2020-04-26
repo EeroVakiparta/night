@@ -226,6 +226,18 @@ public class HelpMe {
         }
         return false;
     }
+
+    public static Integer[][] teeKopio(Integer[][] kopsattava) {
+        int length = kopsattava.length;
+        Integer[][] kopio = new Integer[length][length];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length; j++) {
+                kopio[i][j] = kopsattava[i][j];
+
+            }
+        }
+        return kopio;
+    }
 }
 
 
