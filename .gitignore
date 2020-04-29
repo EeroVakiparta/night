@@ -1,5 +1,7 @@
 /.idea/
 /night.iml
 /out/
+target/
 
 *.zip
+/target/

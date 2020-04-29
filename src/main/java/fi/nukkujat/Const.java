@@ -39,4 +39,5 @@ public class Const {
         public final static int LAUANTAI = 5;
         public final static int SUNNUNTAI = 6;
     }
+
 }
