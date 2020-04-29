@@ -43,13 +43,13 @@ Tutkitaan ( 1. ) Yo-putki:
 ! yövuorojen jälkeen oltava vähintään 2 vapaapäivää = 5 sakkoa
 ! yövuorojen jälkeen oltava nukkumapäivä + vähintään 2 vapaapäivää = 5 sakkoa
 Putkessa Yovuorot: 5 Nukkumapaivat: 0 Vapaat: 1
-YokasittelynTulos= putki: [y, y, y, y, y, v] putkenSakot: 22
+fi.nukkujat.YokasittelynTulos= putki: [y, y, y, y, y, v] putkenSakot: 22
 
 Yövuoroputkia löydetty = 1 kpl
 >>> Sakkoa yhteensä = 22 <<<<
 ```
 
-#####Tarkastellessa yhä Vuoro ja Toive -listaa:
+#####Tarkastellessa yhä Vuoro ja fi.nukkujat.Toive -listaa:
 Esimerkki tulkinnasta: "A5p+" = A vuoro, 5 ryhmä, prioriteetti, toive toteutettu
 ```
 ! vuoropyyntöön ei vastatu = 1 sakkoa (q != v)

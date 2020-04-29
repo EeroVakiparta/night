@@ -1,5 +1,7 @@
 package fi.nukkujat;
+
 import fi.nukkujat.Alyttomat;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,8 +21,8 @@ public class ToiveTest {
 
         ToiveidenTulos toiveidenTulos = kuinkaVihainenTyolainen(randomTyoVuoroLista, randomVuoroToiveLista);
         assertEquals(8, kuinkaHuonoLista(randomTyoVuoroLista));
-        assertEquals(0, toiveidenTulos.toiveSakot);
-        assertEquals(0, toiveidenTulos.prioriteettejaRikottu);
+        Assert.assertEquals(0, toiveidenTulos.toiveSakot);
+        Assert.assertEquals(0, toiveidenTulos.prioriteettejaRikottu);
     }
 
     @Test
@@ -30,8 +32,8 @@ public class ToiveTest {
 
         ToiveidenTulos toiveidenTulos = kuinkaVihainenTyolainen(randomTyoVuoroLista, randomVuoroToiveLista);
         assertEquals(6, kuinkaHuonoLista(randomTyoVuoroLista));
-        assertEquals(0, toiveidenTulos.toiveSakot);
-        assertEquals(0, toiveidenTulos.prioriteettejaRikottu);
+        Assert.assertEquals(0, toiveidenTulos.toiveSakot);
+        Assert.assertEquals(0, toiveidenTulos.prioriteettejaRikottu);
     }
 
     @Test
@@ -42,8 +44,8 @@ public class ToiveTest {
 
         ToiveidenTulos toiveidenTulos = kuinkaVihainenTyolainen(randomTyoVuoroLista, randomVuoroToiveLista);
         assertEquals(8, kuinkaHuonoLista(randomTyoVuoroLista));
-        assertEquals(0, toiveidenTulos.toiveSakot);
-        assertEquals(0, toiveidenTulos.prioriteettejaRikottu);
+        Assert.assertEquals(0, toiveidenTulos.toiveSakot);
+        Assert.assertEquals(0, toiveidenTulos.prioriteettejaRikottu);
     }
 
     @Test
@@ -54,7 +56,7 @@ public class ToiveTest {
 
         ToiveidenTulos toiveidenTulos = kuinkaVihainenTyolainen(randomTyoVuoroLista, randomVuoroToiveLista);
         assertEquals(40, kuinkaHuonoLista(randomTyoVuoroLista));
-        assertEquals(2130, toiveidenTulos.toiveSakot);
-        assertEquals(21, toiveidenTulos.prioriteettejaRikottu);
+        Assert.assertEquals(2130, toiveidenTulos.toiveSakot);
+        Assert.assertEquals(21, toiveidenTulos.prioriteettejaRikottu);
     }
 }

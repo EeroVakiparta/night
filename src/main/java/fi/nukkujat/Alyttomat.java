@@ -52,7 +52,7 @@ public class Alyttomat {
                 poisnukutuPaivat++;
             }
 
-            if (Saanto.POTKUT_VUOROLISTAN_LOPUSSA) {
+            if (Const.Saanto.POTKUT_VUOROLISTAN_LOPUSSA) {
                 // Koska onko sillä väliä sitten vaikka nukkuis ittensä ikiuneen
                 sakko = sakko - latestSakko;
             }
@@ -227,7 +227,7 @@ public class Alyttomat {
                 // Jos työntekijän ryhmätoivetta ei ole toteltu
                 if (toive.getVuoroRyhma() != tyoVuoro.getVuoroRyhma()) {
                     if (priorisoitu) {
-                        sakko = sakko + (1 * Kerroin.PRIORISOINTI_VIRHE);
+                        sakko = sakko + (1 * Const.Kerroin.PRIORISOINTI_VIRHE);
                         prioriteettejaRikottu++;
                         paivasakko++;
                         System.out.println("! priorisoitua ryhmää ei toteltu = " + (1 * Kerroin.PRIORISOINTI_VIRHE) + " sakkoa (" + tyoVuoro.getVuoroRyhma() + " != " + toive.getVuoroRyhma() + ")");

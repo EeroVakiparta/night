@@ -10,7 +10,7 @@ import static fi.nukkujat.HelpMe.*;
 public class Main {
 
     /**
-     * Main.
+     * fi.nukkujat.Main.
      * <p>
      * y = yä
      * n = nukkuma
@@ -32,12 +32,13 @@ public class Main {
      */
     public static void main(String args[]) throws IOException, huonotParametritException {
 
-        List<Toive> toiveet = readToiveet("src/resources/toiveet.txt");
-        List<TyoVuoro> vuorot = readTyoVuorot("src/resources/tyovuorolista1.txt");
+        //TODO: fix the paths Maybe help: https://stackoverflow.com/questions/49222296/not-able-to-load-file-from-maven-resources-with-paths-get
+        List<Toive> toiveet = readToiveet("toiveet.txt");
+        List<TyoVuoro> vuorot = readTyoVuorot("tyovuorolista1.txt");
         tulosta(vuorot, toiveet);
 
-        toiveet = readToiveet("src/resources/toiveet.txt", "Y", "A");
-        vuorot = readTyoVuorot("src/resources/tyovuorolista1.txt", "V", "Y");
+        toiveet = readToiveet("toiveet.txt", "Y", "A");
+        vuorot = readTyoVuorot("tyovuorolista1.txt", "V", "Y");
         tulosta(vuorot, toiveet);
 
         vuorot = makeRandomVuoroLista(15, "ynvai", 3);
@@ -56,7 +57,7 @@ public class Main {
 
         // -- vanat Tehtävän 1 kamat:
 
-//        String randomTyovuorolista = HelpMe.rVuoroLista(30);
+//        String randomTyovuorolista = fi.nukkujat.HelpMe.rVuoroLista(30);
 //        String vuoden_1979_Finnair_tyovuoromalli = "mmmmmvvyyyyyvmmmmmvvmmmmmvv";
 //        String industryFastForwardsRotating = "mmmmyynvvvmmmmyynvvvm";
 //        String industrySlowBackwardsRotating = "mmmmvmmmmvyyyynvvvvvm";
